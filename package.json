@@ -1,14 +1,39 @@
 {
   "name": "daily",
-  "version": "1.0.0",
-  "description": "",
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "tsc"
+  "version": "0.1.0",
+  "description": "An application to generate daily reports of activity from external services and provide a daily report.",
+  "homepage": "https://github.com/bardiharborow/daily#readme",
+  "bugs": {
+    "url": "https://github.com/bardiharborow/daily/issues"
   },
-  "dependencies": {},
+  "license": "MIT",
+  "author": {
+    "name": "Bardi Harborow",
+    "email": "bardi@bardiharborow.com",
+    "url": "https://bardiharborow.com/"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bardiharborow/daily.git"
+  },
+  "scripts": {
+    "format": "biome check --fix",
+    "lint": "biome check",
+    "start": "tsx --env-file-if-exists=.env src/cli.ts",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "octokit": "^5.0.5",
+    "tsx": "^4.21.0"
+  },
   "devDependencies": {
-    "typescript": "^5.5.3"
+    "@biomejs/biome": "2.4.10",
+    "@octokit/types": "^16.0.0",
+    "@types/node": "^25.5.0",
+    "typescript": "^6.0.2",
+    "vitest": "^3.2.4"
   },
   "private": true
 }

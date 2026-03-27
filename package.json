@@ -1,14 +1,23 @@
 {
   "name": "daily",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "biome check",
+    "start": "node dist/index.js",
+    "test": "vitest"
   },
-  "dependencies": {},
+  "dependencies": {
+    "octokit": "^5.0.5"
+  },
   "devDependencies": {
-    "typescript": "^5.5.3"
+    "@biomejs/biome": "2.4.9",
+    "@octokit/types": "^16.0.0",
+    "@types/node": "^25.5.0",
+    "typescript": "^5.5.3",
+    "vitest": "^3.2.4"
   },
   "private": true
 }

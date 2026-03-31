@@ -14,17 +14,41 @@ Copy `.env.example` to `.env` and fill in the required environment variables:
 | `JIRA_EMAIL`          | Jira   | The email address associated with your Atlassian account. |
 | `JIRA_API_TOKEN`      | Jira   | An Atlassian API token with certain scopes.               |
 
-### Creating a GitHub token
+Then run:
+
+```shell
+npm install
+npm start
+```
+
+## Plugins
+
+### GitHub
+
+The GitHub plugin uses the [GitHub REST API](https://docs.github.com/rest) to query for pull request reviews left by the user within the last 24 hours in a specific organization.
+
+It requires a personal access token with specific scopes to authenticate requests.
+
+#### Creating a GitHub token
 
 1. Go to **GitHub → Settings → Developer settings → Personal access tokens → [Fine-grained tokens](https://github.com/settings/personal-access-tokens)**.
 2. Click **Generate new token**.
 3. Give the token a name, select the organization you want to query as the resource owner, and set an expiration date.
 4. Choose repository access, generally **All repositories** is recommended, but you can select specific repositories if you prefer.
-3. Add repository permission for **Pull requests** (read-only).
-4. Click **Generate token**.
-4. Copy the generated token into the `GITHUB_TOKEN` environment variable.
+5. Add repository permission for **Pull requests** (read-only).
+6. Click **Generate token**.
+7. Copy the generated token into the `GITHUB_TOKEN` environment variable.
 
-### Creating a Jira API token
+### Jira
+
+The Jira plugin uses the [Atlassian REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/) to query for:
+* **In progress** issues assigned to the user.
+* **QA** issues that were (previously) assigned to the user at some point within the last 24 hours.
+* **Done** issues assigned to the user that were moved to **Done** within the last 24 hours.
+
+It requires an API token with specific scopes to authenticate requests.
+
+#### Creating a Jira API token
 
 1. Go to **Atlassian → Account Settings → Security → [API Tokens](https://id.atlassian.com/manage-profile/security/api-tokens)**.
 2. Click **Create API token with scopes**.
@@ -35,15 +59,6 @@ Copy `.env.example` to `.env` and fill in the required environment variables:
 7. Set the `JIRA_EMAIL` environment variable to the email address of your Atlassian account.
 8. Go to `https://<my-site-name>.atlassian.net/_edge/tenant_info`.
 9. Copy the value of the `cloudId` key into the `JIRA_CLOUD_ID` environment variable.
-
-### Installation
-
-Then run:
-
-```shell
-npm install
-npm start
-```
 
 ## Example output
 

@@ -98,12 +98,18 @@ export class Jira implements Plugin {
   private readonly client: JiraClientLike;
 
   constructor(
-    baseUrl: string,
+    cloudId: string,
     email: string,
     apiToken: string,
     client?: JiraClientLike,
   ) {
-    this.client = client ?? new RealJiraClient(baseUrl, email, apiToken);
+    this.client =
+      client ??
+      new RealJiraClient(
+        `https://api.atlassian.com/ex/jira/${cloudId}`,
+        email,
+        apiToken,
+      );
   }
 
   async fetchUpdatesByCategory(since: Date): Promise<UpdatesByCategory> {

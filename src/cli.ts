@@ -14,9 +14,9 @@ export function main() {
     throw new Error("GITHUB_ORGANIZATION environment variable is not set");
   }
 
-  const jiraBaseUrl = process.env.JIRA_BASE_URL;
-  if (!jiraBaseUrl) {
-    throw new Error("JIRA_BASE_URL environment variable is not set");
+  const jiraCloudId = process.env.JIRA_CLOUD_ID;
+  if (!jiraCloudId) {
+    throw new Error("JIRA_CLOUD_ID environment variable is not set");
   }
 
   const jiraEmail = process.env.JIRA_EMAIL;
@@ -30,7 +30,7 @@ export function main() {
   }
 
   const enabledPlugins: Plugin[] = [
-    new Jira(jiraBaseUrl, jiraEmail, jiraApiToken),
+    new Jira(jiraCloudId, jiraEmail, jiraApiToken),
     new GitHub(githubToken, githubOrganization),
   ];
 

@@ -40,4 +40,4 @@ fetchUpdatesByCategory(since: Date): Promise<UpdatesByCategory>
 
 Required (see `.env.example`):
 - `GITHUB_TOKEN`, `GITHUB_ORGANIZATION`
-- `JIRA_BASE_URL`, `JIRA_EMAIL`, `JIRA_API_TOKEN`
+- `JIRA_CLOUD_ID`, `JIRA_EMAIL`, `JIRA_API_TOKEN`

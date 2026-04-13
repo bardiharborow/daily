@@ -140,8 +140,8 @@ export class Jira implements Plugin {
 
     const { issues } = await this.client.searchIssues({
       jql:
-        `(assignee = currentUser() and status = "In progress") or ` +
-        `(assignee was currentUser() after "${jqlDate}" and status = "QA") or ` +
+        `(assignee = currentUser() and status in ("In Progress", "In Review")) or ` +
+        `(assignee was currentUser() after "${jqlDate}" and status in ("In Review", "QA")) or ` +
         `(assignee = currentUser() and status = "Done" and (status changed after "${jqlDate}"))`,
       fields: ["summary", "status", "parent"],
       maxResults: 50,

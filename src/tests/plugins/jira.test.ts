@@ -126,6 +126,76 @@ describe("Jira.fetchUpdates", () => {
     expect(result.size).toBe(2);
   });
 
+  it("formats an 'In Progress' issue with 🔄", async () => {
+    stub.searchIssues.mockResolvedValue({
+      issues: [
+        makeIssue({
+          key: "PROJ-1",
+          summary: "Task A",
+          statusName: "In Progress",
+        }),
+      ],
+    });
+
+    const result = await plugin.fetchUpdatesByCategory(SINCE);
+
+    expect(result.get("Other")).toEqual([
+      "PROJ-1: Task A – `In Progress` – 🔄",
+    ]);
+  });
+
+  it("formats an 'In Review' issue with 🔄", async () => {
+    stub.searchIssues.mockResolvedValue({
+      issues: [
+        makeIssue({
+          key: "PROJ-1",
+          summary: "Task A",
+          statusName: "In Review",
+        }),
+      ],
+    });
+
+    const result = await plugin.fetchUpdatesByCategory(SINCE);
+
+    expect(result.get("Other")).toEqual(["PROJ-1: Task A – `In Review` – 🔄"]);
+  });
+
+  it("formats a 'QA' issue with ✅", async () => {
+    stub.searchIssues.mockResolvedValue({
+      issues: [
+        makeIssue({ key: "PROJ-1", summary: "Task A", statusName: "QA" }),
+      ],
+    });
+
+    const result = await plugin.fetchUpdatesByCategory(SINCE);
+
+    expect(result.get("Other")).toEqual(["PROJ-1: Task A – `QA` – ✅"]);
+  });
+
+  it("formats a 'Done' issue with ✅", async () => {
+    stub.searchIssues.mockResolvedValue({
+      issues: [
+        makeIssue({ key: "PROJ-1", summary: "Task A", statusName: "Done" }),
+      ],
+    });
+
+    const result = await plugin.fetchUpdatesByCategory(SINCE);
+
+    expect(result.get("Other")).toEqual(["PROJ-1: Task A – `Done` – ✅"]);
+  });
+
+  it("defaults an unknown status to ❓", async () => {
+    stub.searchIssues.mockResolvedValue({
+      issues: [
+        makeIssue({ key: "PROJ-1", summary: "Task A", statusName: "Blocked" }),
+      ],
+    });
+
+    const result = await plugin.fetchUpdatesByCategory(SINCE);
+
+    expect(result.get("Other")).toEqual(["PROJ-1: Task A – `Blocked` – ❓"]);
+  });
+
   it("trims issue titles", async () => {
     stub.searchIssues.mockResolvedValue({
       issues: [

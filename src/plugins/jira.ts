@@ -90,6 +90,7 @@ class RealJiraClient implements JiraClientLike {
 
 const ISSUE_STATE_EMOJI: Record<string, string> = {
   "In Progress": "🔄",
+  "In Review": "🔄",
   QA: "✅",
   Done: "✅",
 };

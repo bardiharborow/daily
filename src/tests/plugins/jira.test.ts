@@ -184,6 +184,22 @@ describe("Jira.fetchUpdates", () => {
     expect(result.get("Other")).toEqual(["PROJ-1: Task A – `Done` – ✅"]);
   });
 
+  it("formats a 'Cancelled' issue with ✅", async () => {
+    stub.searchIssues.mockResolvedValue({
+      issues: [
+        makeIssue({
+          key: "PROJ-1",
+          summary: "Task A",
+          statusName: "Cancelled",
+        }),
+      ],
+    });
+
+    const result = await plugin.fetchUpdatesByCategory(SINCE);
+
+    expect(result.get("Other")).toEqual(["PROJ-1: Task A – `Cancelled` – ✅"]);
+  });
+
   it("defaults an unknown status to ❓", async () => {
     stub.searchIssues.mockResolvedValue({
       issues: [

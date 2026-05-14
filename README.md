@@ -45,6 +45,7 @@ The Jira plugin uses the [Atlassian REST API](https://developer.atlassian.com/cl
 * **In progress** issues assigned to the user.
 * **QA** issues that were (previously) assigned to the user at some point within the last 24 hours.
 * **Done** issues assigned to the user that were moved to **Done** within the last 24 hours.
+* **Cancelled** issues assigned to the user that were moved to **Cancelled** within the last 24 hours.
 
 It requires an API token with specific scopes to authenticate requests.
 

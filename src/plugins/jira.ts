@@ -93,6 +93,7 @@ const ISSUE_STATE_EMOJI: Record<string, string> = {
   "In Review": "🔄",
   QA: "✅",
   Done: "✅",
+  Cancelled: "✅",
 };
 
 export class Jira implements Plugin {
@@ -142,7 +143,7 @@ export class Jira implements Plugin {
       jql:
         `(assignee = currentUser() and status in ("In Progress", "In Review")) or ` +
         `(assignee was currentUser() after "${jqlDate}" and status in ("In Review", "QA")) or ` +
-        `(assignee = currentUser() and status = "Done" and (status changed after "${jqlDate}"))`,
+        `(assignee = currentUser() and status in ("Done", "Cancelled") and (status changed after "${jqlDate}"))`,
       fields: ["summary", "status", "parent"],
       maxResults: 50,
     });

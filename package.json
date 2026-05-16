@@ -35,5 +35,15 @@
     "typescript": "^6.0.2",
     "vitest": "^3.2.4"
   },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "onFail": "warn"
+    },
+    "packageManager": {
+      "name": "npm",
+      "onFail": "warn"
+    }
+  },
   "private": true
 }

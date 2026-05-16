@@ -11,8 +11,6 @@ jobs:
     name: CI
     runs-on: ubuntu-slim
     steps:
-      - run: lscpu
-
       - uses: actions/checkout@v6
 
       - uses: actions/setup-node@v6

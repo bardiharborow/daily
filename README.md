@@ -77,6 +77,7 @@ Code Review
 
 ```
 npm run format
+npm run typecheck
 npm test
 ```
 

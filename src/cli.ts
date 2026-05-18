@@ -1,4 +1,5 @@
 import { fetchUpdates, formatUpdates } from "./aggregation";
+import { copyToClipboard } from "./clipboard";
 import { GitHub } from "./plugins/github";
 import { Jira } from "./plugins/jira";
 import type { Plugin } from "./types";
@@ -36,8 +37,14 @@ export function main() {
 
   const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
 
-  fetchUpdates(oneDayAgo, enabledPlugins).then((updates) => {
-    console.log(formatUpdates(updates));
+  fetchUpdates(oneDayAgo, enabledPlugins).then(async (updates) => {
+    const output = formatUpdates(updates);
+
+    console.log(output);
+
+    await copyToClipboard(output);
+
+    console.log("\n✨ Copied to clipboard!");
   });
 }
 
